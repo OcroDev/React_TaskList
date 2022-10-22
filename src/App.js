@@ -1,9 +1,10 @@
 import "./App.css";
 import TasklistComponent from "./components/container/taskList.jsx";
+import { RegisterFormik } from "./components/pure/forms/registerFormik";
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <TasklistComponent />
       {/* <RegisterFormik></RegisterFormik> */}
       {/* <TaskFormik></TaskFormik> */}

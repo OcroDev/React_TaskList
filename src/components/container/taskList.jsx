@@ -85,10 +85,10 @@ const TasklistComponent = () => {
       <table>
         <thead>
           <tr>
-            <th scope='col'>Title</th>
-            <th scope='col'>Description </th>
-            <th scope='col'>Priority </th>
-            <th scope='col'>Actions </th>
+            <th scope="col">Title</th>
+            <th scope="col">Description </th>
+            <th scope="col">Priority </th>
+            <th scope="col">Actions </th>
           </tr>
         </thead>
         <tbody>
@@ -121,17 +121,17 @@ const TasklistComponent = () => {
 
   return (
     <div>
-      <div className='col-12'>
-        <div className='card '>
+      <div className="col-12">
+        <div className="card ">
           {/* card header */}
-          <div className='card-header p-3'>
+          <div className="card-header p-3">
             <h5>Your Tasks:</h5>
           </div>
           {/*card body (content) */}
           <div
-            className='card-body internal-scroll'
+            className="card-body internal-scroll"
             style={{ postion: "reltive", height: "400px" }}
-            data-mdb-perfect-scrollbar='true'
+            data-mdb-perfect-scrollbar="true"
           >
             {/*//TODO add loading spinner */}
             {loading ? (
