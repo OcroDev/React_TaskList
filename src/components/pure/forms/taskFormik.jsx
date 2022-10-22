@@ -4,7 +4,7 @@ import React from "react";
 import Textfield from "@mui/material/TextField";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
-import { Button, MenuItem, FormControl } from "@mui/material";
+import { Button, MenuItem, FormControl, Alert } from "@mui/material";
 import PropTypes from "prop-types";
 
 //formik
@@ -16,22 +16,6 @@ import { Task } from "../../../models/task.class";
 import { LEVELS } from "../../../models/levels.enum";
 
 export const TaskFormik = ({ add, length }) => {
-  //*Metodos
-  function addTask(values) {
-    const newTask = new Task(
-      values.taskName,
-      values.taskDescription,
-      false,
-      values.taskLevel
-    );
-
-    values.taskName = "";
-    values.taskDescription = "";
-    values.taskLevel = "";
-
-    add(newTask);
-  }
-
   const validationSchema = yup.object().shape({
     taskName: yup
       .string()
@@ -53,9 +37,27 @@ export const TaskFormik = ({ add, length }) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      addTask(values);
+      setTimeout(() => {
+        addTask(values);
+      }, 2000);
     },
   });
+  //*Metodos
+  function addTask(values) {
+    const newTask = new Task(
+      values.taskName,
+      values.taskDescription,
+      false,
+      values.taskLevel
+    );
+
+    values.taskName = "";
+    values.taskDescription = "";
+    values.taskLevel = "";
+    formik.setSubmitting(false);
+
+    add(newTask);
+  }
 
   return (
     <div>
@@ -120,6 +122,9 @@ export const TaskFormik = ({ add, length }) => {
           <Button type="submit" variant="outlined">
             Add Task
           </Button>
+          {formik.isSubmitting ? (
+            <Alert severity="info">Creating Task, please wait...</Alert>
+          ) : null}
         </div>
       </form>
     </div>
