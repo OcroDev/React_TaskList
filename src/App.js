@@ -1,6 +1,5 @@
 import "./App.css";
 import TasklistComponent from "./components/container/taskList.jsx";
-import { RegisterFormik } from "./components/pure/forms/registerFormik";
 
 function App() {
   return (

@@ -4,8 +4,7 @@ import React from "react";
 import Textfield from "@mui/material/TextField";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
-import { Button, MenuItem, Alert } from "@mui/material";
-import { FormControl } from "@mui/material";
+import { Button, MenuItem, FormControl } from "@mui/material";
 import PropTypes from "prop-types";
 
 //formik
@@ -25,6 +24,10 @@ export const TaskFormik = ({ add, length }) => {
       false,
       values.taskLevel
     );
+
+    values.taskName = "";
+    values.taskDescription = "";
+    values.taskLevel = "";
 
     add(newTask);
   }
@@ -70,6 +73,8 @@ export const TaskFormik = ({ add, length }) => {
             type="text"
             value={formik.values.taskName}
             onChange={formik.handleChange}
+            error={formik.touched.taskName && Boolean(formik.errors.taskName)}
+            helperText={formik.touched.taskName && formik.errors.taskName}
             className="mb-4"
           ></Textfield>
 
@@ -81,19 +86,31 @@ export const TaskFormik = ({ add, length }) => {
             type="text"
             value={formik.values.taskDescription}
             onChange={formik.handleChange}
+            error={
+              formik.touched.taskDescription &&
+              Boolean(formik.errors.taskDescription)
+            }
+            helperText={
+              formik.touched.taskDescription && formik.errors.taskDescription
+            }
             className="mb-4"
           ></Textfield>
           <FormControl fullWidth>
             <InputLabel id="priority-label">Priority</InputLabel>
             <Select
               labelId="priorit-label"
-              id="priority"
-              name="priority"
+              id="taskLevel"
+              name="taskLevel"
               label="Priority"
-              defaultValue=""
-              className="mb-4"
+              value={formik.values.taskLevel}
               onChange={formik.handleChange}
+              className="mb-4"
+              error={
+                formik.touched.taskLevel && Boolean(formik.errors.taskLevel)
+              }
+              helperText={formik.touched.taskLevel && formik.errors.taskLevel}
             >
+              <MenuItem value="">Select priority</MenuItem>
               <MenuItem value={LEVELS.NORMAL}>Normal</MenuItem>
               <MenuItem value={LEVELS.BLOCKING}>Urgent</MenuItem>
               <MenuItem value={LEVELS.URGENT}>Blocking</MenuItem>
@@ -103,10 +120,6 @@ export const TaskFormik = ({ add, length }) => {
           <Button type="submit" variant="outlined">
             Add Task
           </Button>
-          {formik.isSubmitting ? (
-            <Alert severity="info">This is an info alert — check it out!</Alert>
-          ) : null}
-          {!formik.isSubmitting && null}
         </div>
       </form>
     </div>
