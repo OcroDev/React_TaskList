@@ -21,15 +21,23 @@ export const AboutPage = () => {
   return (
     <div>
       <h1>About | FAQs Page</h1>
-      <button className="btn btn-info btn-sm" onClick={() => navigation("/")}>
-        Go to home
-      </button>
-      <button className="btn btn-warning btn-sm" onClick={() => goBack()}>
-        Go Back
-      </button>
-      <button className="btn btn-warning btn-sm" onClick={() => goForward()}>
-        Go Forward
-      </button>
+      <div>
+        <button
+          className="btn btn-info btn-sm m-1"
+          onClick={() => navigation("/")}
+        >
+          Go to home
+        </button>
+        <button className="btn btn-warning btn-sm m-1" onClick={() => goBack()}>
+          Go Back
+        </button>
+        <button
+          className="btn btn-warning btn-sm m-1"
+          onClick={() => goForward()}
+        >
+          Go Forward
+        </button>
+      </div>
     </div>
   );
 };
