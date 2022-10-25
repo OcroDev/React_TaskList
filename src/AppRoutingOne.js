@@ -7,24 +7,20 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import { HomePage } from "./pages/Home/homePage";
+
 import { Error404 } from "./pages/404/error404";
 import { AboutPage } from "./pages/about-faqs/AboutPage";
 import { ProfilePage } from "./pages/profile/ProfilePage";
 import { TaskPage } from "./pages/tasks/TaskPage";
 import { TaskDetailPage } from "./pages/tasks/TaskDetailPage";
 import { TaskBar } from "./components/pure/TaskBar";
+import { HomePage } from "./pages/home/homePage";
 
 function AppRoutingOne() {
   return (
     <Router>
-      {/* <div>
-        <aside>
-          <Link to="/">|| HOME </Link>
-          <Link to="/about">| ABOUT </Link>
-          <Link to="/faqs">| FAQS </Link>
-          <Link to="/any404">| doesn't exist ||</Link>
-        </aside>
+      <div>
+        <TaskBar />
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -33,13 +29,12 @@ function AppRoutingOne() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/tasks" element={<TaskPage />} />
             <Route path="/tasks/:id" element={<TaskDetailPage />} />
-            {/* 404 - page not found /}
+            {/* 404 - page not found */}
             <Route path="*" element={<Error404 />} />
-            {/* <Route path="*" element={<Navigate to="not_found" replace />} /> /}
+            {/* <Route path="*" element={<Navigate to="not_found" replace />} /> */}
           </Routes>
         </main>
-      </div > */}
-      <TaskBar></TaskBar>
+      </div>
     </Router>
   );
 }

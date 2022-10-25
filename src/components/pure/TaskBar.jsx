@@ -7,8 +7,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import { Link as Linkui } from "@mui/material";
-//import MenuIcon from "@mui/icons-material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
 
 //*REACT ROUTER DOM
 import { Link } from "react-router-dom";
@@ -25,20 +24,30 @@ export function TaskBar() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            {/* <MenuIcon /> */}
+            <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Login</Button>
-          <Link
-            className="btn btn-outline-primary"
-            style={{ color: "white", textDecoration: "none" }}
-          >
-            ABOUT
-          </Link>
-          <Linkui> ABOUT</Linkui>
+
+          <Button color="inherit">
+            <Link to="/" style={{ color: "white", textDecoration: "none" }}>
+              HOME
+            </Link>
+          </Button>
+          <Button color="inherit">
+            <Link
+              to="/login"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              LOGIN
+            </Link>
+          </Button>
+          <Button color="inherit">
+            <Link
+              to="/about"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              ABOUT
+            </Link>
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>
