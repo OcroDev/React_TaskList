@@ -1,77 +1,76 @@
 import React from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Field, Form, ErrorMessage, useFormik } from "formik";
 import * as Yup from "yup";
+import { Alert, Button, TextField } from "@mui/material";
+import { Navigate } from "react-router-dom";
 
-const loginSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Invalid email format")
-    .required("Email is required"),
-  password: Yup.string().required("Password is required"),
-});
+export const LoginFormik = ({ userState }) => {
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email("Invalid email format")
+      .required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
 
-export const LoginFormik = () => {
-  const Errormsg = <p style={{ color: "red", fontWeight: "bold" }}></p>;
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      await new Promise((r) => setTimeout(r, 1000));
+      ////alert(JSON.stringify(values, null, 2));
+      //* we save de data in the local storage
+      localStorage.setItem("credentials", values);
+      values.email = "";
+      values.password = "";
+      formik.setSubmitting(false);
+      userState();
+    },
+  });
 
-  const initialCredentials = {
-    email: "",
-    password: "",
-  };
   return (
-    <>
-      <h4>Login Formik</h4>
-      <Formik
-        initialValues={initialCredentials}
-        validationSchema={loginSchema}
-        onSubmit={async (values) => {
-          await new Promise((r) => setTimeout(r, 1000));
-          alert(JSON.stringify(values, null, 2));
-          //* we save de data in the local storage
-          localStorage.setItem("credentials", values);
-          values.email = "";
-          values.password = "";
-        }}
+    <div>
+      <h4 className="m-auto">Login</h4>
+
+      <form
+        onSubmit={formik.handleSubmit}
+        className="d-flex justify-content-center align-item-center mb-4"
       >
-        {({
-          values,
-          touched,
-          errors,
-          isSubmitting,
-          handleChange,
-          handleBlur,
-        }) => (
-          <Form>
-            <label htmlFor="email">Email</label>
-            <Field
-              id="email"
-              name="email"
-              type="email"
-              placeholder="example@email.com"
-            />
-
-            {errors.email && touched.email && (
-              <ErrorMessage name="email" component="div"></ErrorMessage>
-            )}
-
-            <label htmlFor="password">Password</label>
-            <Field
-              id="password"
-              name="password"
-              type="password"
-              placeholder="password"
-            />
-
-            {errors.password && touched.password && (
-              <ErrorMessage name="password" component="div"></ErrorMessage>
-            )}
-
-            {/* // <div className="error">
-              //   <p>{errors.email}</p>
-              // </div> */}
-            <button type="submit">Login</button>
-            {isSubmitting ? <p>Login your credentials ... </p> : null}
-          </Form>
-        )}
-      </Formik>
-    </>
+        <div className="form-outline flex-fill form-group mt-2">
+          <TextField
+            fullWidth
+            id="email"
+            name="email"
+            label="Email"
+            type="email"
+            value={formik.values.taskName}
+            onChange={formik.handleChange}
+            error={formik.touched.taskName && Boolean(formik.errors.taskName)}
+            helperText={formik.touched.taskName && formik.errors.taskName}
+            className="mb-4"
+          />
+          <TextField
+            fullWidth
+            id="password"
+            name="password"
+            label="Password"
+            type="password"
+            value={formik.values.taskName}
+            onChange={formik.handleChange}
+            error={formik.touched.taskName && Boolean(formik.errors.taskName)}
+            helperText={formik.touched.taskName && formik.errors.taskName}
+            className="mb-4"
+          />
+          <Button type="submit" variant="outlined">
+            Login
+          </Button>
+          {formik.isSubmitting ? (
+            <Alert severity="info">Login your credentials ... </Alert>
+          ) : null}
+        </div>
+      </form>
+    </div>
   );
 };

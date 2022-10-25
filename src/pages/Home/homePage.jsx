@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const PROFILE_PAGE = "/profile";
 
 export const HomePage = () => {
-  const location = useLocation();
+  // const location = useLocation();
   const navigate = useNavigate();
 
   const navigation = (path) => {
@@ -26,3 +26,5 @@ export const HomePage = () => {
     </div>
   );
 };
+
+export default HomePage;

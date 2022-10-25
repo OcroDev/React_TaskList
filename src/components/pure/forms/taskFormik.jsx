@@ -110,7 +110,7 @@ export const TaskFormik = ({ add, length }) => {
               error={
                 formik.touched.taskLevel && Boolean(formik.errors.taskLevel)
               }
-              helperText={formik.touched.taskLevel && formik.errors.taskLevel}
+              //helperText={formik.touched.taskLevel && formik.errors.taskLevel}
             >
               <MenuItem value="">Select priority</MenuItem>
               <MenuItem value={LEVELS.NORMAL}>Normal</MenuItem>

@@ -12,7 +12,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 //*REACT ROUTER DOM
 import { Link } from "react-router-dom";
 
-export function TaskBar() {
+export function TaskBar({ state }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -33,12 +33,22 @@ export function TaskBar() {
             </Link>
           </Button>
           <Button color="inherit">
-            <Link
-              to="/login"
-              style={{ color: "white", textDecoration: "none" }}
-            >
-              LOGIN
-            </Link>
+            {localStorage.getItem("credentials") ? (
+              <Link
+                to="/login"
+                style={{ color: "white", textDecoration: "none" }}
+                onClick={() => state()}
+              >
+                LOGOUT
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                style={{ color: "white", textDecoration: "none" }}
+              >
+                LOGIN
+              </Link>
+            )}
           </Button>
           <Button color="inherit">
             <Link
@@ -46,6 +56,11 @@ export function TaskBar() {
               style={{ color: "white", textDecoration: "none" }}
             >
               ABOUT
+            </Link>
+          </Button>
+          <Button color="inherit">
+            <Link to="/FAQs" style={{ color: "white", textDecoration: "none" }}>
+              FAQs
             </Link>
           </Button>
         </Toolbar>
