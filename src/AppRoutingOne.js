@@ -22,6 +22,19 @@ import { useState } from "react";
 function AppRoutingOne() {
   const [logged, setLogged] = useState(localStorage.getItem("credentials"));
 
+  let taskList = [
+    {
+      id: 1,
+      name: "Task 1",
+      description: "My First task",
+    },
+    {
+      id: 2,
+      name: "Task 2",
+      description: "My Second task",
+    },
+  ];
+
   const loggedIn = () => {
     setLogged(localStorage.getItem("credentials"));
   };
@@ -49,7 +62,13 @@ function AppRoutingOne() {
               element={!logged ? <Navigate to="/login" /> : <ProfilePage />}
             />
             <Route path="/tasks" element={<TaskPage />} />
-            <Route path="/tasks/:id" element={<TaskDetailPage />} />
+            <Route
+              exact
+              path="/task/:id"
+              render={({ match }) => (
+                <TaskDetailPage task={taskList[match.params.id - 1]} />
+              )}
+            />
             {/* 404 - page not found */}
             <Route path="*" element={<Error404 />} />
             {/* <Route path="*" element={<Navigate to="not_found" replace />} /> */}
@@ -63,3 +82,5 @@ function AppRoutingOne() {
 export default AppRoutingOne;
 
 //! link del curso https://campus.open-bootcamp.com/cursos/1/leccion/209
+
+//! https://www.youtube.com/watch?v=KKXFmzr0nKk

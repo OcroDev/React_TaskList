@@ -63,6 +63,22 @@ export function TaskBar({ state }) {
               FAQs
             </Link>
           </Button>
+          <Button color="inherit">
+            <Link
+              to="/task/1"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              Task 1
+            </Link>
+          </Button>
+          <Button color="inherit">
+            <Link
+              to="/task/2"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              Task 2
+            </Link>
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>
