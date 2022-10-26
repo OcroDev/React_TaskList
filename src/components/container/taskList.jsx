@@ -97,6 +97,7 @@ const TasklistComponent = () => {
             return (
               <TaskComponent
                 key={index}
+                id={index}
                 task={task}
                 complete={completeTask}
                 remove={removeTask}

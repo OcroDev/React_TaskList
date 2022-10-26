@@ -7,6 +7,7 @@ import {
   Routes,
   Navigate,
   useNavigate,
+  useParams,
 } from "react-router-dom";
 
 import { Error404 } from "./pages/404/error404";
@@ -15,26 +16,17 @@ import { ProfilePage } from "./pages/profile/ProfilePage";
 import { TaskPage } from "./pages/tasks/TaskPage";
 import { TaskDetailPage } from "./pages/tasks/TaskDetailPage";
 import { TaskBar } from "./components/pure/TaskBar";
-import HomePage from "./pages/Home/homePage";
 import { LoginPage } from "./pages/auth/loginPage";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { HomePage } from "./pages/home/homePage";
 function AppRoutingOne() {
   const [logged, setLogged] = useState(localStorage.getItem("credentials"));
-
-  let taskList = [
-    {
-      id: 1,
-      name: "Task 1",
-      description: "My First task",
-    },
-    {
-      id: 2,
-      name: "Task 2",
-      description: "My Second task",
-    },
-  ];
-
+  const params = useParams();
+  let taskList = {
+    id: 0,
+    name: "Task 1",
+    description: "My First task",
+  };
   const loggedIn = () => {
     setLogged(localStorage.getItem("credentials"));
   };
@@ -44,37 +36,29 @@ function AppRoutingOne() {
   //  console.log(localStorage.getItem("credentials"));
   return (
     <Router>
-      <div>
-        <TaskBar state={loggedOut} />
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/faqs" element={<AboutPage />} />
-            <Route
-              path="/login"
-              element={
-                !logged ? <LoginPage state={loggedIn} /> : <Navigate to="/" />
-              }
-            />
-            <Route
-              path="/profile"
-              element={!logged ? <Navigate to="/login" /> : <ProfilePage />}
-            />
-            <Route path="/tasks" element={<TaskPage />} />
-            <Route
-              exact
-              path="/task/:id"
-              render={({ match }) => (
-                <TaskDetailPage task={taskList[match.params.id - 1]} />
-              )}
-            />
-            {/* 404 - page not found */}
-            <Route path="*" element={<Error404 />} />
-            {/* <Route path="*" element={<Navigate to="not_found" replace />} /> */}
-          </Routes>
-        </main>
-      </div>
+      <Routes>
+        <Route path="/" element={<TaskBar state={loggedOut} />}>
+          <Route index path="/" element={<HomePage></HomePage>} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="faqs" element={<AboutPage />} />
+          <Route
+            path="login"
+            element={
+              !logged ? <LoginPage state={loggedIn} /> : <Navigate to="/" />
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              !logged ? <Navigate replace to="/login" /> : <ProfilePage />
+            }
+          />
+          <Route path="tasks" element={<TaskPage />} />
+          <Route path="task/:id" element={<TaskDetailPage task={taskList} />} />
+          {/* 404 - page not found */}
+          <Route path="*" element={<Error404 />} />
+        </Route>
+      </Routes>
     </Router>
   );
 }

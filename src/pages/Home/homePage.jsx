@@ -7,6 +7,9 @@ export const HomePage = () => {
   // const location = useLocation();
   const navigate = useNavigate();
 
+  const navigateProps = useNavigate();
+
+  navigateProps("/");
   const navigation = (path) => {
     navigate(path);
   };
@@ -26,5 +29,3 @@ export const HomePage = () => {
     </div>
   );
 };
-
-export default HomePage;

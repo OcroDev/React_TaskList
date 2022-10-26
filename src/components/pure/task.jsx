@@ -7,8 +7,9 @@ import { LEVELS } from "../../models/levels.enum.js";
 
 //*CSS
 import "../../styles/task.scss";
+import { Link } from "react-router-dom";
 
-const TaskComponent = ({ task, complete, remove }) => {
+const TaskComponent = ({ task, complete, remove, id }) => {
   //*STYLES
   const taskCompleted = {
     color: "gray",
@@ -79,14 +80,19 @@ const TaskComponent = ({ task, complete, remove }) => {
       );
     }
   }
-
+  console.log(id);
   return (
     <tr
       className="`fw-normal` task-pending"
       style={task.completed ? taskCompleted : taskPending}
     >
       <th>
-        <span className="m-2"> {task.name} </span>
+        <Link
+          to={"/task/" + id.toString()}
+          style={task.completed ? taskCompleted : taskPending}
+        >
+          <span className="m-2"> {task.name} </span>
+        </Link>
       </th>
       <td className="align-middle">
         <span>{task.description}</span>
