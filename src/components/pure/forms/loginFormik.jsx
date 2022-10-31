@@ -45,10 +45,10 @@ export const LoginFormik = ({ userState }) => {
             name="email"
             label="Email"
             type="email"
-            value={formik.values.taskName}
+            value={formik.values.email}
             onChange={formik.handleChange}
-            error={formik.touched.taskName && Boolean(formik.errors.taskName)}
-            helperText={formik.touched.taskName && formik.errors.taskName}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
             className="mb-4"
           />
           <TextField
@@ -57,10 +57,10 @@ export const LoginFormik = ({ userState }) => {
             name="password"
             label="Password"
             type="password"
-            value={formik.values.taskName}
+            value={formik.values.password}
             onChange={formik.handleChange}
-            error={formik.touched.taskName && Boolean(formik.errors.taskName)}
-            helperText={formik.touched.taskName && formik.errors.taskName}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
             className="mb-4"
           />
           <Button type="submit" variant="outlined">

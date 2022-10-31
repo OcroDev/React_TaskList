@@ -7,14 +7,15 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
 import AppRoutingOne from "./AppRoutingOne";
 import reportWebVitals from "./reportWebVitals";
+import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    {/* <App /> */}
+  // <React.StrictMode>
+  <App />
 
-    <AppRoutingOne />
-  </React.StrictMode>
+  // <AppRoutingOne />
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

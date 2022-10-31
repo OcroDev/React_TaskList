@@ -1,12 +1,14 @@
 import "./App.css";
 import TasklistComponent from "./components/container/taskList.jsx";
+import { AxiosCRUDExample } from "./components/pure/AxiosCRUDExample";
 
 function App() {
   return (
     <div className="App">
-      <TasklistComponent />
+      {/* <TasklistComponent /> */}
       {/* <RegisterFormik></RegisterFormik> */}
       {/* <TaskFormik></TaskFormik> */}
+      <AxiosCRUDExample />
     </div>
   );
 }
