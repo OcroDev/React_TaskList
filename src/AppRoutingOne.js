@@ -68,3 +68,5 @@ export default AppRoutingOne;
 //! link del curso https://campus.open-bootcamp.com/cursos/1/leccion/209
 
 //! https://www.youtube.com/watch?v=KKXFmzr0nKk
+
+//! https://www.youtube.com/watch?v=an2hyrNwCNE (RTK Redux)

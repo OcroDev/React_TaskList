@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import reportWebVitals from "./reportWebVitals";
 
 //*cargando bootstrap al proyecto
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
 import AppRoutingOne from "./AppRoutingOne";
-import reportWebVitals from "./reportWebVitals";
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

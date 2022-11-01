@@ -29,7 +29,7 @@ export const getUserById = (id) => {
   return axios.get(`https://reqres.in/api/users/${id}`);
 };
 
-//TODO: create user
+// create user
 export const createUser = (name, job) => {
   let body = {
     name,
@@ -39,6 +39,18 @@ export const createUser = (name, job) => {
   return axios.post("https://reqres.in/api/users", body);
 };
 
-//TODO: Update user
+// Update user
+export const updateUser = (name, job, id) => {
+  let body = {
+    name,
+    job,
+  };
+  //Returns the response with a Promise
+  return axios.put(`https://reqres.in/api/users/${id}`, body);
+};
 
-//TODO: Delete user
+// Delete user
+export const deleteUserById = (id) => {
+  //Returns the response with a Promise
+  return axios.delete(`https://reqres.in/api/users/${id}`);
+};

@@ -5,6 +5,8 @@ import {
   getAllUser,
   getUserById,
   createUser,
+  updateUser,
+  deleteUserById,
 } from "../../services/axiosCRUDService";
 import * as Yup from "yup";
 import { Alert, Button, TextField } from "@mui/material";
@@ -16,7 +18,7 @@ export const AxiosCRUDExample = () => {
   const authUser = (values) => {
     login(values.email, values.password)
       .then((response) => {
-        if (response.data.token) {
+        if (response.data.token && response.status === 200) {
           alert(JSON.stringify(response.data.token));
           sessionStorage.setItem("token", response.data.token);
         } else {
@@ -42,18 +44,24 @@ export const AxiosCRUDExample = () => {
 
   const obtainAllPageUser = (page) => {
     getAllPagedUser(page)
-      .then((response) => console.log(JSON.stringify(response.data.data)))
+      .then((response) => {
+        if (response.data.data && response.status === 200) {
+          console.log(JSON.stringify(response.data.data));
+        } else {
+          throw new Error("users not found");
+        }
+      })
       .catch((error) => alert(`Something went wrong: ${error}`));
   };
 
   const obtainUserById = (id) => {
     getUserById(id)
       .then((response) => {
-        if (response.data && response.status === 200) {
+        if (response.data.data && response.status === 200) {
           console.log(response.data.data);
         } else {
+          throw new Error("user not found");
         }
-        return new Error("user not found");
       })
       .catch((error) => {
         console.err(`something went wrong: ${error}`);
@@ -62,17 +70,31 @@ export const AxiosCRUDExample = () => {
   };
 
   const createNewUser = (name, job) => {
-    createUser(name, job)
-      .then((response) => {
-        if (response.data && response.status === 200) {
-          console.log(response.status);
-        } else {
-          throw new Error("User not created");
-        }
-      })
-      .catch((error) => {
-        console.err(`something went wrong: ${error}`);
-      });
+    createUser(name, job).then((response) => {
+      if (response.data && response.status === 201) {
+        console.log(response.data);
+      } else {
+        throw new Error("user not created");
+      }
+    });
+  };
+  const modifyUser = (name, job, id) => {
+    updateUser(name, job, id).then((response) => {
+      if (response.status === 200) {
+        console.log(response.data);
+      } else {
+        throw new Error("user not updated");
+      }
+    });
+  };
+  const deleteUser = (id) => {
+    deleteUserById(id).then((response) => {
+      if (response.status === 204) {
+        console.log(`the user ${id} has been deleted`);
+      } else {
+        throw new Error("user not deleted");
+      }
+    });
   };
 
   const validationSchema = Yup.object().shape({
@@ -147,6 +169,10 @@ export const AxiosCRUDExample = () => {
         <button onClick={() => createNewUser("morpheus", "leader")}>
           Create user
         </button>
+        <button onClick={() => modifyUser("morpheus", "developer", 3)}>
+          update user
+        </button>
+        <button onClick={() => deleteUser(2)}>delete user</button>
       </div>
     </>
   );
